@@ -9,7 +9,7 @@ import (
 )
 
 func part1(scanner *bufio.Scanner) string {
-	shapeSizes := buildShapeLengths(scanner)
+	shapeSizes := buildShapeSizes(scanner)
 
 	hasText := true
 	count := 0
@@ -43,7 +43,7 @@ func part1(scanner *bufio.Scanner) string {
 	return fmt.Sprint(count)
 }
 
-func buildShapeLengths(scanner *bufio.Scanner) map[int]int {
+func buildShapeSizes(scanner *bufio.Scanner) map[int]int {
 	shapeSizes := map[int]int{}
 	for scanner.Scan() {
 		text := scanner.Text()
