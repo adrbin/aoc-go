@@ -63,14 +63,14 @@ func part2(scanner *bufio.Scanner) string {
 		}
 
 		for i := currentIndex; i < nextIndex-1; i++ {
-			number := ""
+			var number strings.Builder
 			for j := 0; j < len(array)-1; j++ {
 				digit := string(array[j][i])
 				if digit != " " {
-					number += string(array[j][i])
+					number.WriteString(string(array[j][i]))
 				}
 			}
-			value, err := strconv.Atoi(number)
+			value, err := strconv.Atoi(number.String())
 			utils.Check(err)
 
 			if operator == '+' {
