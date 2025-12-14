@@ -23,7 +23,7 @@ func Run(part1, part2 PuzzleFunc) {
 
 	f, err := os.Open(fileName)
 	Check(err)
-	scanner := bufio.NewScanner(f, )
+	scanner := bufio.NewScanner(f)
 	result1 := part1(scanner)
 	fmt.Println(result1)
 	f.Seek(0, 0)
@@ -43,6 +43,17 @@ func TestPuzzle(t *testing.T, expected string, puzzleFunc PuzzleFunc) {
 	}
 }
 
+func BenchmarkPuzzle(b *testing.B, expected string, puzzleFunc PuzzleFunc) {
+	f, err := os.Open("input.txt")
+	Check(err)
+	scanner := bufio.NewScanner(f)
+	result := puzzleFunc(scanner)
+
+	if result != expected {
+		b.Fatalf(`Expected %q, instead of %q`, expected, result)
+	}
+}
+
 func BuildSet(text string) map[rune]struct{} {
 	exists := struct{}{}
 	set := make(map[rune]struct{})
@@ -55,7 +66,7 @@ func BuildSet(text string) map[rune]struct{} {
 
 func SumChan(length int, ch chan int) int {
 	total := 0
-	for i := 0; i < length; i++ {
+	for range length {
 		total += <-ch
 	}
 
@@ -83,4 +94,28 @@ func (stack *Stack[T]) Peek() (element T) {
 
 func Mod(a, b int) int {
 	return (a%b + b) % b
+}
+
+func Min(a, b int) int {
+	if b < a {
+		return b
+	}
+
+	return a
+}
+
+func Max(a, b int) int {
+	if b > a {
+		return b
+	}
+
+	return a
+}
+
+func Abs(number int) int {
+	if number < 0 {
+		return -number
+	}
+
+	return number
 }

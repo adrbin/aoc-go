@@ -20,7 +20,7 @@ func sumInvalidIds(scanner *bufio.Scanner, f func(string) bool) string {
 	sum := 0
 	for scanner.Scan() {
 		text := scanner.Text()
-		for _, ranges := range strings.Split(text, ",") {
+		for ranges := range strings.SplitSeq(text, ",") {
 			if ranges == "" {
 				continue
 			}
