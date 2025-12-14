@@ -316,7 +316,7 @@ func part2(scanner *bufio.Scanner) string {
 		}
 	}
 
-	return "Did not found"
+	return "Have not found"
 }
 
 func main() {
