@@ -23,6 +23,7 @@ func Run(part1, part2 PuzzleFunc) {
 
 	f, err := os.Open(fileName)
 	Check(err)
+	defer f.Close()
 	scanner := bufio.NewScanner(f)
 	result1 := part1(scanner)
 	fmt.Println(result1)
@@ -35,6 +36,7 @@ func Run(part1, part2 PuzzleFunc) {
 func TestPuzzle(t *testing.T, expected string, puzzleFunc PuzzleFunc) {
 	f, err := os.Open("input.txt")
 	Check(err)
+	defer f.Close()
 	scanner := bufio.NewScanner(f)
 	result := puzzleFunc(scanner)
 
